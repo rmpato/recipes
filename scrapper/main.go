@@ -53,6 +53,7 @@ func main(){
 		return
 	}
 
+	//TODO: Validate in DB if the recipe (external) ID is already inserted and prevent duplicates
 	fmt.Println(bonappetitRecipes.Recipes[0].Id)
 	fmt.Println(bonappetitRecipes.Recipes[1].Id)
 	fmt.Println(bonappetitRecipes.Recipes[2].Id)

@@ -1,0 +1,41 @@
+version: '3'
+services:
+    go-telegram-bot:
+        build:
+            dockerfile: Dockerfile
+            context: ./scrapper
+        #ports:
+        #  - '8080:8080'
+        # environment:
+        #   #WORLD TIME API Endpoint
+        #   - TIME_API=http://worldtimeapi.org/api/timezone/
+        #   #Telegram bot token, used to perform post calls against telegram and send responses
+        #   - TELEGRAM_BOT_TOKEN=1801658900:AAE0dPXRo-UG1LNfo40-Br3nN9yF3eD56F0
+        #   #Connection String for the DB, based on the MySQL instance configured in this docker file
+        #   - DB_CONNECTION_STRING=user:password@tcp(db:3306)/db?charset=utf8mb4&parseTime=True&loc=Local
+        #   #We can set here in which mode to set Gin.
+        #   #Options are 'debug', 'release', 'test', depending on which our desires are
+        #   - GIN_MODE=release
+        depends_on:
+          - db
+    db:
+        image: mysql:5.7
+        restart: always
+        environment:
+            MYSQL_DATABASE: 'db'
+            # We define a user name so we don't have to acces as root the DB
+            MYSQL_USER: 'user'
+            # Set a password for user
+            MYSQL_PASSWORD: 'password'
+            # Set a password for root access
+            MYSQL_ROOT_PASSWORD: 'password'
+        ports:
+            # We map a port from the host to the MySQL Port running inside the container
+            - '3306:3306'
+        expose:
+            # Opens port 3306 on the container, so we can connect to the DB with MySQLWorkbench, for example
+            - '3306'
+        # We define a volume for MySQL, so we can keep its data after shutting down containers 
+        volumes:
+            - ./my-db:/var/lib/mysql
+            
