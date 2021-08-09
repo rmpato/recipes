@@ -21,6 +21,7 @@ func main(){
 		fmt.Println(err)
 		return
 	}
+
 	req.Header.Add("Connection", "keep-alive")
 	req.Header.Add("sec-ch-ua", "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"")
 	req.Header.Add("accept", "application/json;")
@@ -55,6 +56,7 @@ func main(){
 	fmt.Println(bonappetitRecipes.Recipes[0].Id)
 	fmt.Println(bonappetitRecipes.Recipes[1].Id)
 	fmt.Println(bonappetitRecipes.Recipes[2].Id)
+
 	defer res.Body.Close()
 }
 
