@@ -7,7 +7,7 @@ import (
 )
 
 //InitDb initializes the connection to the db and the db object, which through we interact with the DB
-func Init() *gorm.DB{
+func Init() *gorm.DB {
 	dsn := os.Getenv("DB_CONNECTION_STRING")
 	db, err := gorm.Open(mysql.New(mysql.Config{
 		DSN:                       dsn,   // data source name
@@ -28,5 +28,16 @@ func Init() *gorm.DB{
 }
 
 type Recipe struct {
+	gorm.Model
+	Id          int64
+	ExternalId  string
+	Name        string
+	Steps       string
+	Ingredients []RecipeIngredient
+}
 
+type RecipeIngredient struct {
+	gorm.Model
+	Name        string
+	Description string
 }

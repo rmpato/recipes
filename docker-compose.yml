@@ -1,21 +1,14 @@
 version: '3'
 services:
-    go-telegram-bot:
+    recipes:
         build:
             dockerfile: Dockerfile
             context: ./scrapper
-        #ports:
+        # ports:
         #  - '8080:8080'
-        # environment:
-        #   #WORLD TIME API Endpoint
-        #   - TIME_API=http://worldtimeapi.org/api/timezone/
-        #   #Telegram bot token, used to perform post calls against telegram and send responses
-        #   - TELEGRAM_BOT_TOKEN=1801658900:AAE0dPXRo-UG1LNfo40-Br3nN9yF3eD56F0
-        #   #Connection String for the DB, based on the MySQL instance configured in this docker file
-        #   - DB_CONNECTION_STRING=user:password@tcp(db:3306)/db?charset=utf8mb4&parseTime=True&loc=Local
-        #   #We can set here in which mode to set Gin.
-        #   #Options are 'debug', 'release', 'test', depending on which our desires are
-        #   - GIN_MODE=release
+        environment:
+          #Connection String for the DB, based on the MySQL instance configured in this docker file
+          - DB_CONNECTION_STRING=user:password@tcp(db:3306)/db?charset=utf8mb4&parseTime=True&loc=Local
         depends_on:
           - db
     db:
