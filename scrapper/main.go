@@ -61,13 +61,50 @@ func main(){
 	defer res.Body.Close()
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 type BonappetitScrap struct {
 	Recipes []BonappetitRecipe `json:"items"`
 }
 type BonappetitRecipe struct {
 	Groups []IngredientGroup `json:"ingredientGroups"`
+	PreparationGroups []struct {
+		Hed   string `json:"hed"`
+		Steps []struct {
+			Description []interface{} `json:"description"`
+		} `json:"steps"`
+		MicroSteps []interface{} `json:"microSteps"`
+	} `json:"preparationGroups"`
 	Title string `json:"hed"`
 	Id string `json:"id"`
+	Asd string `json:"asd"`
 }
 
 type IngredientGroup struct {
