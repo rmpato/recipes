@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func CanUnmarshallResponseToStruct(t *testing.T) {
+func TestCanUnmarshallResponseToStruct(t *testing.T) {
 	input := `{
     "preparationGroups": [
         {
