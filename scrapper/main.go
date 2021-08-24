@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"scrapper/domain"
+	"scrapper/repositories"
 	"strings"
 )
 
@@ -43,7 +45,7 @@ func main(){
 		return
 	}
 
-	var bonappetitRecipes BonappetitScrap
+	var bonappetitRecipes domain.BonappetitScrap
 	decErr := json.NewDecoder(res.Body).
 		Decode(&bonappetitRecipes)
 
@@ -54,64 +56,11 @@ func main(){
 	}
 
 	//TODO: Validate in DB if the recipe (external) ID is already inserted and prevent duplicates
-	fmt.Println(bonappetitRecipes.Recipes[0].Id)
-	fmt.Println(bonappetitRecipes.Recipes[1].Id)
-	fmt.Println(bonappetitRecipes.Recipes[2].Id)
+	//fmt.Println(bonappetitRecipes.Recipes[0].Id)
+	//fmt.Println(bonappetitRecipes.Recipes[1].Id)
+	//fmt.Println(bonappetitRecipes.Recipes[2].Id)
+
+	repositories.Save(bonappetitRecipes)
 
 	defer res.Body.Close()
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-type BonappetitScrap struct {
-	Recipes []BonappetitRecipe `json:"items"`
-}
-type BonappetitRecipe struct {
-	Groups []IngredientGroup `json:"ingredientGroups"`
-	PreparationGroups []struct {
-		Hed   string `json:"hed"`
-		Steps []struct {
-			Description []interface{} `json:"description"`
-		} `json:"steps"`
-		MicroSteps []interface{} `json:"microSteps"`
-	} `json:"preparationGroups"`
-	Title string `json:"hed"`
-	Id string `json:"id"`
-	Asd string `json:"asd"`
-}
-
-type IngredientGroup struct {
-	Title string `json:"hed"`
-	Ingredients []Ingredient `json:"ingredients"`
-}
-
-type Ingredient struct {
-	Name string `json:"name"`
 }
