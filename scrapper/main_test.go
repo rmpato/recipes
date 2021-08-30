@@ -121,7 +121,6 @@ func TestCanUnmarshallResponseToStruct(t *testing.T) {
 	for _, desc := range data.PreparationGroups[0].Steps[0].Description {
 		_, isString := desc.(string)
 		if !isString {
-
 			for _, value := range desc.([]interface{}) {
 				if len(value.(string)) > 3 {
 					fmt.Println(value.(string))

@@ -1,10 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
-	"scrapper/domain"
+	"scrapper/mappers"
 	"scrapper/repositories"
 	"strings"
 )
@@ -45,9 +44,7 @@ func main(){
 		return
 	}
 
-	var bonappetitRecipes domain.BonappetitScrap
-	decErr := json.NewDecoder(res.Body).
-		Decode(&bonappetitRecipes)
+	bonappetitRecipes, decErr := mappers.GetBonappetitRecipesFromJson(res)
 
 	if decErr != nil {
 		fmt.Println("Error decoding")
